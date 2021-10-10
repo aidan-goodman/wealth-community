@@ -5,8 +5,7 @@
 <mapper namespace="top.aidan.community.dao.UserMapper">
 
     <sql id="insertFields">
-        username
-        , password, salt, email, type, status, activation_code, header_url, create_time
+        username, password, salt, email, type, status, activation_code, header_url, create_time
     </sql>
 
     <sql id="selectFields">
