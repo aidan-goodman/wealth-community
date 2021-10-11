@@ -15,27 +15,27 @@
 
     <select id="selectById" resultType="User">
         select
-        <include refid="selectFields"></include>
+        <include refid="selectFields"/>
         from user
         where id = #{id}
     </select>
 
     <select id="selectByName" resultType="User">
         select
-        <include refid="selectFields"></include>
+        <include refid="selectFields"/>
         from user
         where username = #{username}
     </select>
 
     <select id="selectByEmail" resultType="User">
         select
-        <include refid="selectFields"></include>
+        <include refid="selectFields"/>
         from user
         where email = #{email}
     </select>
 
     <insert id="insertUser" parameterType="User" keyProperty="id">
-        insert into user (<include refid="insertFields"></include>)
+        insert into user (<include refid="insertFields"/>)
         values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl},
         #{createTime})
     </insert>

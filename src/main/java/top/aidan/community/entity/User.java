@@ -1,9 +1,6 @@
 package top.aidan.community.entity;
 
 import lombok.Data;
-import lombok.ToString;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
