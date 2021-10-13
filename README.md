@@ -5,11 +5,10 @@
 
 ## 搭建开发环境
 
-* 构建工具：Apache Maven
-* 集成开发工具：IntelliJ IDEA
+* 构建工具：Maven
 * 数据库：MySQL、Redis
-* 应用服务器：Apache Tomcat
-* 版本控制工具：Git
+* 应用服务器：Tomcat
+* VCS 工具：Git
 
 后端使用 SpringBoot 整合 Spring Framework 进行开发，前端使用 Thymeleaf，持久层操作暂时使用 MyBatis+HikariCP（之前一直用 Druid）
 
@@ -25,8 +24,10 @@ mybatis，设置 mapper 文件的位置、实体类包名、使用主键等
 
 #### 用户表
 
-字段|类型|解释
-:---:|:---:|:---:
+user:
+
+字段          |类型         |解释
+:---:       |:---:      |:---:
 id          |int        |主键、自增
 username    |varchar    |用户名，创建索引
 password    |varchar    |用户密码
@@ -38,6 +39,21 @@ activation_code |varchar        |激活码
 header_url      |varchar        |用户头像地址
 create_time     |timestamp      |注册时间
 
+#### 帖子表
+
+discuss_post:
+
+字段	|类型	|备注
+:---:       |:---:      |:---:
+id	        |int	    |主键、自增
+user_id	    |int	    |发帖的用户 id，创建索引
+title	    |varchar	|帖子表标题
+content	    |text	    |帖子内容
+type	    |int	    |帖子类型：0 普通、1 置顶
+comment_count	|int	|评论数量
+status	    |int	|帖子状态：0 普通、1 精华、2 拉黑
+create_time	    |timestamp	    |评论发表时间
+
 #### 数据库访问测试
 
 用户相关操作：
@@ -45,6 +61,8 @@ create_time     |timestamp      |注册时间
 * 创建对应 user 表的 User 实体类
 * 创建 UserMapper 接口，使用 @Mapper 注解
 * 创建 user-mapper.xml，重复 sql 语句可以写在 <sql id = "xxx"> 标签，通过 <include refid="xxx"/> 引用
+
+## 代码编写
 
 ### 开发社区首页
 
@@ -58,7 +76,7 @@ create_time     |timestamp      |注册时间
 
 创建对应 discuss_post 表的 DisscussPost 实体类、DisscussPostMapper 接口
 
-分页查询中用户 id 是可选参数，通过动态 SQL 选择，如果为 0 就不使用，在开发用户个人主页查询用户发帖记录时需要使用 ，如果只有一个参数，并且在动态 SQL 的 <if> 里使用，必须使用 @Param 加别名
+分页查询中用户 id 是可选参数，通过动态 SQL 选择，如果为 0 就不使用
 
 创建 disscusspost-mapper.xml
 
@@ -66,6 +84,23 @@ create_time     |timestamp      |注册时间
 
 `<if test="userId!=0">` userID 为 0 时不使用，按照类型，发帖时间排序
 
-开发业务层 创建 DiscussPostService 类，可以分页查询帖子和帖子数量
+#### 开发业务层
+
+创建 DiscussPostService 类，可以分页查询帖子和帖子数量
 
 创建 UserService 类，实现根据 id 查询用户功能，因为显示帖子时不显示用户 id，而是显示用户名
+
+---
+
+视图层没什么说的，用的是网上现有的前端素材，使用 Thymeleaf 对其进行动态更换
+
+把每个帖子做成一个 map 集合，在前端遍历输出即可
+
+#### 分页组件的开发
+
+创建 Page 实体类，封装分页信息，包括当前页码、显示限制、帖子总数、查询路径等。显示的起始页不能小于 1，最大页不能超过 total
+
+在 index.html 中，当 page.rows > 0 时显示分页信息
+
+如果 page.current 等于 1 或 page.total，代表是首页或末页，此时不能点击上一页和下一页，使用 Bootstrap 分页组件中 `disabled` 属性实现
+

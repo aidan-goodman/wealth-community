@@ -1,8 +1,14 @@
 package top.aidan.community.entity;
 
+import lombok.Data;
+
 /**
- * 封装分页相关的信息
+ * Created by Aidan on 2021/10/13 14:43
+ * GitHub: github.com/huaxin0304
+ * Blog: aidanblog.top
  */
+
+// 将分页处理数据进行实体封装
 public class Page {
 
     // 当前页码
@@ -66,7 +72,6 @@ public class Page {
     /**
      * 获取总页数
      *
-     * @return 利用行数 / 每页数据
      */
     public int getTotal() {
         // rows / limit [+1]
@@ -79,7 +84,6 @@ public class Page {
 
     /**
      * 获取起始页码
-     *
      */
     public int getFrom() {
         int from = current - 2;
@@ -88,7 +92,6 @@ public class Page {
 
     /**
      * 获取结束页码
-     *
      */
     public int getTo() {
         int to = current + 2;

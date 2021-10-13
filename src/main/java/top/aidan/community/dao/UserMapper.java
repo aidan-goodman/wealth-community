@@ -1,12 +1,17 @@
 package top.aidan.community.dao;
 
-import top.aidan.community.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import top.aidan.community.entity.User;
+
+/**
+ * Created by Aidan on 2021/10/13 14:41
+ * GitHub: github.com/huaxin0304
+ * Blog: aidanblog.top
+ */
 
 @Mapper
 public interface UserMapper {
-
     // 加上 @Param 防止出现对应问题
     User selectById(@Param("id") int id);
 
@@ -21,5 +26,4 @@ public interface UserMapper {
     int updateHeader(@Param("id") int id, @Param("headerUrl") String headerUrl);
 
     int updatePassword(@Param("id") int id, @Param("password") String password);
-
 }

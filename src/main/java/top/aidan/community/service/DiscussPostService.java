@@ -1,11 +1,16 @@
 package top.aidan.community.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.aidan.community.dao.DiscussPostMapper;
 import top.aidan.community.entity.DiscussPost;
 
 import java.util.List;
+
+/**
+ * Created by Aidan on 2021/10/13 14:57
+ * GitHub: github.com/huaxin0304
+ * Blog: aidanblog.top
+ */
 
 @Service
 public class DiscussPostService {
