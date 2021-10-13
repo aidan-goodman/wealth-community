@@ -3,7 +3,10 @@ spring:
   thymeleaf:
     # 设置为 false，修改 thymeleaf 的 template 可以不用重启 springboot
     cache: false
-    prefix: classpath:/templates/
+    prefix: classpath:/templates
+    suffix: .html
+    servlet:
+      content-type: text/html
   # DataSourceProperties
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,7 +1,7 @@
-
 马上就毕业设计选题了，跟导师商量了一下想做个论坛，正好手头也缺一个正八经的 SpringBoot 项目（之前只写过案例 demo），所以正好先做个类似的练练手，顺便把我简历上的 SSM 项目替换下来
 
-本项目是一个仿牛客社区的论坛项目，打算实现邮箱注册、验证码登录、发帖、评论、私信、点赞、关注、统计网站访问次数等基本功能，进阶一点的像系统通知，Elasticsearch 全文搜索、生成 pdf 文件、上传云服务器等功能也会去做，这里写一下开发文档方便回顾总结
+本项目是一个仿牛客社区的论坛项目，打算实现邮箱注册、验证码登录、发帖、评论、私信、点赞、关注、统计网站访问次数等基本功能，进阶一点的像系统通知，Elasticsearch 全文搜索、生成 pdf
+文件、上传云服务器等功能也会去做，这里写一下开发文档方便回顾总结
 
 ## 搭建开发环境
 
@@ -19,12 +19,24 @@ mybatis，设置 mapper 文件的位置、实体类包名、使用主键等
 
 关闭 thymeleaf 缓存，方便修改模板不用重启
 
-
 ### 数据库设计
 
 [sql 地址](https://github.com/huaxin0304/Code-Community/tree/master/sql)
 
-字段含义写在注释上
+#### 用户表
+
+字段|类型|解释
+:---:|:---:|:---:
+id          |int        |主键、自增
+username    |varchar    |用户名，创建索引
+password    |varchar    |用户密码
+salt        |varchar    |加密盐值
+email       |varchar    |用户邮箱，创建索引
+type        |int    |用户类型：0 普通、1 管理员、2 版主
+status      |int    |用户状态：0 未激活、1 已激活
+activation_code |varchar        |激活码
+header_url      |varchar        |用户头像地址
+create_time     |timestamp      |注册时间
 
 #### 数据库访问测试
 
@@ -54,7 +66,6 @@ mybatis，设置 mapper 文件的位置、实体类包名、使用主键等
 
 `<if test="userId!=0">` userID 为 0 时不使用，按照类型，发帖时间排序
 
-开发业务层
-创建 DiscussPostService 类，可以分页查询帖子和帖子数量
+开发业务层 创建 DiscussPostService 类，可以分页查询帖子和帖子数量
 
 创建 UserService 类，实现根据 id 查询用户功能，因为显示帖子时不显示用户 id，而是显示用户名
