@@ -5,39 +5,44 @@
 <mapper namespace="top.aidan.community.dao.UserMapper">
 
     <sql id="insertFields">
-        username, password, salt, email, type, status, activation_code, header_url, create_time
+        username, password, salt, email, type, status, activation_code,
+        header_url, create_time
     </sql>
 
     <sql id="selectFields">
-        id
-        , username, password, salt, email, type, status, activation_code, header_url, create_time
+        id, username, password, salt, email, type, status, activation_code,
+        header_url, create_time
     </sql>
 
     <select id="selectById" resultType="User">
         select
         <include refid="selectFields"/>
         from user
-        where id = #{id}
+            where id = #{id}
     </select>
 
     <select id="selectByName" resultType="User">
         select
         <include refid="selectFields"/>
         from user
-        where username = #{username}
+            where username = #{username}
     </select>
 
     <select id="selectByEmail" resultType="User">
         select
         <include refid="selectFields"/>
         from user
-        where email = #{email}
+            where email = #{email}
     </select>
 
     <insert id="insertUser" parameterType="User" keyProperty="id">
+        # noinspection SqlInsertValues
+
         insert into user (<include refid="insertFields"/>)
-        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl},
-        #{createTime})
+        values(
+            #{username}, #{password}, #{salt}, #{email}, #{type},
+            #{status}, #{activationCode}, #{headerUrl},#{createTime}
+        )
     </insert>
 
     <update id="updateStatus">

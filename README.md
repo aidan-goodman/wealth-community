@@ -10,7 +10,7 @@
 * 应用服务器：Tomcat
 * VCS 工具：Git
 
-后端使用 SpringBoot 整合 Spring Framework 进行开发，前端使用 Thymeleaf，持久层操作暂时使用 MyBatis+HikariCP（之前一直用 Druid）
+后端使用 SpringBoot 整合 Spring Framework 进行开发，前端使用 Thymeleaf，持久层操作暂时使用 MyBatis + HikariCP（之前一直用 Druid）
 
 首先配置 DataSource，设置基本连接信息、最大线程数，最小空闲线程数，最大空闲时间等
 
@@ -38,6 +38,11 @@ status      |int    |用户状态：0 未激活、1 已激活
 activation_code |varchar        |激活码
 header_url      |varchar        |用户头像地址
 create_time     |timestamp      |注册时间
+
+解释：
+
+* 对常用字段如用户名和邮箱进行索引的创建
+* 密码采用加盐的方式进行存储，保证安全性
 
 #### 帖子表
 
@@ -98,9 +103,12 @@ create_time	    |timestamp	    |评论发表时间
 
 #### 分页组件的开发
 
+`后续会使用 PageHelper 进行重构`
+
 创建 Page 实体类，封装分页信息，包括当前页码、显示限制、帖子总数、查询路径等。显示的起始页不能小于 1，最大页不能超过 total
 
 在 index.html 中，当 page.rows > 0 时显示分页信息
 
 如果 page.current 等于 1 或 page.total，代表是首页或末页，此时不能点击上一页和下一页，使用 Bootstrap 分页组件中 `disabled` 属性实现
+
 

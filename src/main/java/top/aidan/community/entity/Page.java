@@ -1,7 +1,5 @@
 package top.aidan.community.entity;
 
-import lombok.Data;
-
 /**
  * Created by Aidan on 2021/10/13 14:43
  * GitHub: github.com/huaxin0304

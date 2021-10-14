@@ -45,6 +45,7 @@ public class HomeController {
                 Map<String, Object> map = new HashMap<>();
                 map.put("post", post);
                 User user = userService.findUserById(post.getUserId());
+                // 将发帖人信息进行保存
                 map.put("user", user);
                 discussPosts.add(map);
             }

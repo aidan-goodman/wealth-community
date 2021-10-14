@@ -1,9 +1,11 @@
 package top.aidan.community;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import top.aidan.community.dao.DiscussPostMapper;
 import top.aidan.community.dao.UserMapper;
 import top.aidan.community.entity.DiscussPost;
@@ -18,9 +20,10 @@ import java.util.List;
  * Blog: aidanblog.top
  */
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = CommunityApplication.class)
-public class MapperTests {
+class MapperTests {
 
     @Autowired
     private UserMapper userMapper;
@@ -33,7 +36,7 @@ public class MapperTests {
         User user = userMapper.selectById(101);
         System.out.println(user);
 
-        user = userMapper.selectByName("liubei");
+        user = userMapper.selectByName("liuBei");
         System.out.println(user);
 
         user = userMapper.selectByEmail("nowcoder101@sina.com");
@@ -47,7 +50,7 @@ public class MapperTests {
         user.setPassword("123456");
         user.setSalt("abc");
         user.setEmail("test@qq.com");
-        user.setHeaderUrl("http://www.nowcoder.com/101.png");
+        user.setHeaderUrl("https://images.nowcoder.com/images/20210924/1030032960_1632464487707/64188F08D61F98C9EE5212F58672A8F4?x-oss-process=image/resize,m_mfit,h_200,w_200");
         user.setCreateTime(new Date());
 
         int rows = userMapper.insertUser(user);
@@ -60,7 +63,7 @@ public class MapperTests {
         int rows = userMapper.updateStatus(150, 1);
         System.out.println(rows);
 
-        rows = userMapper.updateHeader(150, "http://www.nowcoder.com/102.png");
+        rows = userMapper.updateHeader(150, "https://images.nowcoder.com/images/20201031/157517829_1604126433282_605475850F555A9A1D76953CFB3E39A6?x-oss-process=image/resize,m_mfit,h_200,w_200");
         System.out.println(rows);
 
         rows = userMapper.updatePassword(150, "hello");
