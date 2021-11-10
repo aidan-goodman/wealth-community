@@ -5,25 +5,30 @@
          https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <!-- lookup parent from repository -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.5</version>
-        <relativePath/>
-    </parent>
-    <!--  项目描述项  -->
+
+    <!--  项目信息  -->
     <groupId>top.aidan</groupId>
     <artifactId>community</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>community</name>
     <description>community</description>
 
-    <!--  版本指定  -->
+    <!--  全局配置  -->
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <mysql.version>8.0.22</mysql.version>
+        <mysql.version>8.0.27</mysql.version>
     </properties>
+
+    <!-- lookup parent from repository -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.6</version>
+        <relativePath/>
+    </parent>
+
     <!-- 依赖声明 -->
     <dependencies>
         <!-- 基础 starter 包 -->
@@ -44,6 +49,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>2.5.6</version>
+        </dependency>
+
         <!-- 工具性依赖：热重启、配置提示、注解生成方法 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -61,7 +72,7 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--  数据访问：库连接、MyBatis  -->
+        <!--  数据访问：MySQL 驱动、MyBatis  -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -107,6 +118,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.5</version>
                 <configuration>
                     <excludes>
                         <exclude>

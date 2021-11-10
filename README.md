@@ -111,4 +111,14 @@ create_time	    |timestamp	    |评论发表时间
 
 如果 page.current 等于 1 或 page.total，代表是首页或末页，此时不能点击上一页和下一页，使用 Bootstrap 分页组件中 `disabled` 属性实现
 
+### 开发登录模块
 
+#### 添加右键发送功能
+
+导入 `spring-boot-starter-mail` 依赖，进行端口和主机的配置，用户密码使用 smtp 的授权码而不是邮箱登录密码，否则报错如下：
+
+```
+Authentication failed; nested exception is javax.mail.AuthenticationFailedException: 535 Error: authentication failed
+```
+
+编写邮箱工具类方便操作，在工具类里打开 html 格式

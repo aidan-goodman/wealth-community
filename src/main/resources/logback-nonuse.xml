@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 从高到地低 OFF 、 FATAL 、 ERROR 、 WARN 、 INFO 、 DEBUG 、 TRACE 、 ALL -->
+<!-- 日志输出规则：根据当前 ROOT 级别，日志输出时，级别高于 root 默认的级别时会输出 -->
+<!-- 以下每个配置的 filter 是过滤掉输出到文件里面，只记录本级别的日志，会出现高级别文件依然出现低级别的日志信息现象 -->
+
+<!-- scan、scanPeriod、debug 均使用默认值 -->
 <configuration>
+
     <contextName>community</contextName>
     <property name="LOG_PATH" value="C:/Data Files/Config Files/LogFiles"/>
-    <property name="APPDIR" value="community"/>
-
-
-    <!-- 控制台输出 -->
-    <appender name="ConsoleLog" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
+    <property name="APP_DIR" value="community"/>
 
     <!-- error file -->
     <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/${APPDIR}/log_error.log</file>
+        <file>${LOG_PATH}/${APP_DIR}/log_error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APPDIR}/error/log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${APP_DIR}/error/log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>5MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -38,9 +35,9 @@
 
     <!-- warn file -->
     <appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/${APPDIR}/log_warn.log</file>
+        <file>${LOG_PATH}/${APP_DIR}/log_warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APPDIR}/warn/log-warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${APP_DIR}/warn/log-warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>5MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -60,9 +57,9 @@
 
     <!-- info file -->
     <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/${APPDIR}/log_info.log</file>
+        <file>${LOG_PATH}/${APP_DIR}/log_info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APPDIR}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${APP_DIR}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>5MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -81,24 +78,28 @@
     </appender>
 
     <!-- console -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="ConsoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>info</level>
+            <level>INFO</level>
         </filter>
     </appender>
 
+    <!-- 项目文件打印级别 -->
     <logger name="top.aidan.community" level="error"/>
+    <!-- mapper 级别
+    <logger name="top.aidan.community.dao" level="debug"/>
+    -->
 
     <root level="info">
         <!--
         <appender-ref ref="FILE_ERROR"/>
         <appender-ref ref="FILE_WARN"/>
         <appender-ref ref="FILE_INFO"/>
-        <appender-ref ref="STDOUT"/>
         -->
         <appender-ref ref="ConsoleLog"/>
     </root>
