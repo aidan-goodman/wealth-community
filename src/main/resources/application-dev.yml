@@ -1,9 +1,14 @@
+# community
+community:
+  path:
+    domain: http://localhost:8080
+# spring
 spring:
   # Thymeleaf
   thymeleaf:
     # 设置为 false，修改 thymeleaf 的 template 可以不用重启 springboot
     cache: false
-    prefix: classpath:/templates
+    prefix: classpath:/templates/
     suffix: .html
     servlet:
       content-type: text/html
@@ -32,3 +37,7 @@ mybatis:
   configuration:
     use-generated-keys: true
     map-underscore-to-camel-case: true
+# server Properties
+server:
+  servlet:
+    context-path: /community

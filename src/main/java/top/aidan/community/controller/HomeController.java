@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Aidan on 2021/10/13 14:39
- * GitHub: github.com/huaxin0304
- * Blog: aidanblog.top
  * @author Aidan
+ * @createTime 2021/11/11 10:11
+ * @GitHub github.com/huaxin0304
+ * @Blog aidanblog.top
  */
 
 @Controller
@@ -45,7 +45,7 @@ public class HomeController {
         List<Map<String, Object>> discussPosts = new ArrayList<>();
         if (list != null) {
             for (DiscussPost post : list) {
-                Map<String, Object> map = new HashMap<>();
+                Map<String, Object> map = new HashMap<>(2);
                 map.put("post", post);
                 User user = userService.findUserById(post.getUserId());
                 // 将发帖人信息进行保存

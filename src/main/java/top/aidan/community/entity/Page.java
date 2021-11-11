@@ -4,9 +4,11 @@ package top.aidan.community.entity;
  * Created by Aidan on 2021/10/13 14:43
  * GitHub: github.com/huaxin0304
  * Blog: aidanblog.top
+ *
+ * @author Aidan
+ * 将分页处理数据进行实体封装
  */
 
-// 将分页处理数据进行实体封装
 public class Page {
 
     // 当前页码
@@ -34,7 +36,8 @@ public class Page {
 
     public void setLimit(int limit) {
         // 不超过 100，保证效率和阅读体验
-        if (limit >= 1 && limit <= 100) {
+        final int MAX_LIMIT = 100;
+        if (limit >= 1 && limit <= MAX_LIMIT) {
             this.limit = limit;
         }
     }
@@ -69,7 +72,6 @@ public class Page {
 
     /**
      * 获取总页数
-     *
      */
     public int getTotal() {
         // rows / limit [+1]
