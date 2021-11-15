@@ -22,13 +22,15 @@
     <div class="main">
         <div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
             <h3 class="text-center text-info border-bottom pb-3">登&nbsp;&nbsp;录</h3>
-            <form class="mt-5">
+            <form class="mt-5" method="post" th:action="@{/login}">
                 <div class="form-group row">
                     <label for="username" class="col-sm-2 col-form-label text-right">账号:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control is-invalid" id="username" placeholder="请输入您的账号!"
+                        <input type="text" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
+                               th:value="${param.username}"
+                               name="username" id="username" placeholder="请输入您的账号!"
                                required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" th:text="${usernameMsg}">
                             该账号不存在!
                         </div>
                     </div>
@@ -36,9 +38,11 @@
                 <div class="form-group row mt-4">
                     <label for="password" class="col-sm-2 col-form-label text-right">密码:</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control is-invalid" id="password" placeholder="请输入您的密码!"
+                        <input type="password" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
+                               th:value="${param.password}"
+                               name="password" id="password" placeholder="请输入您的密码!"
                                required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" th:text="${passwordMsg}">
                             密码长度不能小于8位!
                         </div>
                     </div>
@@ -46,20 +50,23 @@
                 <div class="form-group row mt-4">
                     <label for="verifycode" class="col-sm-2 col-form-label text-right">验证码:</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control is-invalid" id="verifycode" placeholder="请输入验证码!">
-                        <div class="invalid-feedback">
+                        <input type="text" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
+                               name="code" id="verifycode" placeholder="请输入验证码!">
+                        <div class="invalid-feedback" th:text="${codeMsg}">
                             验证码不正确!
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <img src="../img/captcha.png" style="width:100px;height:40px;" class="mr-2"/>
-                        <a href="javascript:;" class="font-size-12 align-bottom">刷新验证码</a>
+                        <img src="/static/img/captcha.png" th:src="@{/kaptcha}" style="width:100px;height:40px;"
+                             id="captcha" class="mr-2" alt="10"/>
+                        <a href="javascript:refresh_captcha();" class="font-size-12 align-bottom">刷新验证码</a>
                     </div>
                 </div>
                 <div class="form-group row mt-4">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-10">
-                        <input type="checkbox" id="remember-me" checked="checked">
+                        <input type="checkbox" id="remember-me" name="rememberMe" checked="checked"
+                               th:checked="${param.remberMe}">
                         <label class="form-check-label" for="remember-me">记住我</label>
                         <a href="forget.html" class="text-danger float-right">忘记密码?</a>
                     </div>
@@ -81,5 +88,16 @@
 </div>
 <!-- 公共 JS 脚本 -->
 <div th:replace="common :: common_script"></div>
+<!-- 刷新验证码方法——定义新路径更改 src 属性 -->
+<script>
+    function refresh_captcha() {
+        // path = ../community/kaptcha
+        // 新路径与原路径相同，浏览器可能忽略图片刷新，通过添加 param 的方式“欺骗”
+        let path = CONTEXT_PATH + "/kaptcha?p=" + Math.random();
+        // 通过 jQuery 进行属性更替
+        $("#captcha").attr("src", path);
+
+    }
+</script>
 </body>
 </html>

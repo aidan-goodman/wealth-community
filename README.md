@@ -133,3 +133,15 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 * 验证邮箱，使用 `userId` + 激活码的方式进行激活操作，更新状态
 
 期间使用 map 存储错误信息，验证时对冗余结果进行封装；前端进行字段回填与错误提示
+
+#### 验证码功能
+
+导入 Google 的 Kaptcha 依赖后使用 Configuration 类进行 Bean 的声明，封装一个验证码生成的接口，将 text 写入到 Session 中后将 text 绘制成 image 显示在页面上
+
+#### 登录功能
+
+考虑到状态的判断，在用户登录时进行登录凭证的封装。Dao 层封装 login_ticket 的插入，status 更新，和登录凭证的查询
+
+用户登录时进行格式的校验，状态的校验和密码比对与封装，将每阶段信息封装到 map 中进行前端界面的显示
+
+用户退出登录时将 ticket 的 status 更新为 1

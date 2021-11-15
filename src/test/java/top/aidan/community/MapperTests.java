@@ -7,8 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import top.aidan.community.dao.DiscussPostMapper;
+import top.aidan.community.dao.LoginTicketMapper;
 import top.aidan.community.dao.UserMapper;
 import top.aidan.community.entity.DiscussPost;
+import top.aidan.community.entity.LoginTicket;
 import top.aidan.community.entity.User;
 
 import java.util.Date;
@@ -30,6 +32,9 @@ class MapperTests {
 
     @Autowired
     private DiscussPostMapper discussPostMapper;
+
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
 
     @Test
     public void testSelectUser() {
@@ -80,5 +85,29 @@ class MapperTests {
         int rows = discussPostMapper.selectDiscussPostRows(149);
         System.out.println(rows);
     }
+
+    @Test
+    public void testInsertLoginTicket() {
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(154);
+        loginTicket.setTicket("aidanTicket");
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000 * 60 * 10));
+
+        loginTicketMapper.insertLoginTicket(loginTicket);
+    }
+
+    @Test
+    public void testSelectLoginTicket() {
+        LoginTicket aidanTicket = loginTicketMapper.selectByTicket("aidanTicket");
+        System.out.println(aidanTicket);
+    }
+
+    @Test
+    public void testUpdateLoginTicketStatus() {
+        int resultCount = loginTicketMapper.updateStatus("aidanTicket", 1);
+        System.out.println(resultCount);
+    }
+
 }
 

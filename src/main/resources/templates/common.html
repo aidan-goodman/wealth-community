@@ -9,6 +9,7 @@
               crossorigin="anonymous"/>
         <link rel="stylesheet" th:href="@{/css/global.css}"/>
     </div>
+    <title>common page</title>
 </head>
 <body>
 
@@ -60,7 +61,7 @@
                                 src="http://images.nowcoder.com/head/1t.png"
                                 class="rounded-circle"
                                 style="width: 30px"
-                        />
+                                alt="user icon image"/>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a
@@ -74,6 +75,7 @@
                         >账号设置</a
                         >
                         <a class="dropdown-item text-center" href="site/login.html"
+                           th:href="@{/logout}"
                         >退出登录</a
                         >
                         <div class="dropdown-divider"></div>
