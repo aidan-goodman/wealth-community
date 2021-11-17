@@ -152,4 +152,4 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 
 > 客户端发起请求 --> Interceptor 进行拦截 --> 进行方法处理（获取 Cookie 中的登录凭证 --> 检验有效性后获取 User 对象） --> 将 User 在视图上进行解析
 
-为防止并发冲突使用 ThreadLocal 进行存储
+为防止并发冲突使用 ThreadLocal 进行 User Object 的存储
