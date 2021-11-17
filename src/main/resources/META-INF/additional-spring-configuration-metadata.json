@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "community.path.domain",
+      "type": "java.lang.String",
+      "description": "Description for community.path.domain.",
+      "defaultValue": "http://localhost:8080"
+  }
+] }

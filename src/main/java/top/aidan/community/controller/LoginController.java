@@ -145,30 +145,39 @@ public class LoginController implements CommunityConstant {
         return "site/login";
     }
 
+    /**
+     * 《错误》
+     *
+     * @param username 郑愁予
+     */
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(String username, String password, String code, boolean rememberMe,
                         Model model, HttpSession session, HttpServletResponse response) {
 
-        // 获取当前页面的验证码
+        // 恰若青石的街道向晚
         String kaptcha = (String) session.getAttribute("kaptcha");
 
+        // 跫音不响，三月的春帷不揭
         if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
             model.addAttribute("codeMsg", "验证码不正确");
             return "/site/login";
         }
 
-        // 检查账号密码
+        // 你底心是小小的窗扉紧掩
         int expiredSeconds = rememberMe ? REMEMBER_EXPIRE_SECONDS : DEFAULT_EXPIRE_SECONDS;
         Map<String, Object> map = userService.login(username, password, expiredSeconds);
 
+        // 我达达的马蹄是美丽的错误
         String cookieName = "ticket";
         if (map.containsKey(cookieName)) {
-            Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
+            Cookie cookie = new Cookie(cookieName, map.get(cookieName).toString());
             cookie.setPath(contextPath);
             cookie.setMaxAge(expiredSeconds);
             response.addCookie(cookie);
             return "redirect:/index";
         } else {
+
+            // 我不是归人，是个过客...
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
             return "site/login";

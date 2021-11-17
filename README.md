@@ -145,3 +145,11 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 用户登录时进行格式的校验，状态的校验和密码比对与封装，将每阶段信息封装到 map 中进行前端界面的显示
 
 用户退出登录时将 ticket 的 status 更新为 1
+
+#### 进行登录状态检查
+
+使用拦截器完成对登录状态的检查，具体流程如下：
+
+> 客户端发起请求 --> Interceptor 进行拦截 --> 进行方法处理（获取 Cookie 中的登录凭证 --> 检验有效性后获取 User 对象） --> 将 User 在视图上进行解析
+
+为防止并发冲突使用 ThreadLocal 进行存储

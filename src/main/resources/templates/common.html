@@ -36,18 +36,18 @@
                 <li class="nav-item ml-3 btn-group-vertical">
                     <a class="nav-link" href="index.html" th:href="@{/index}">首页</a>
                 </li>
-                <li class="nav-item ml-3 btn-group-vertical">
+                <li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser!=null}">
                     <a class="nav-link position-relative" href="site/letter.html"
                     >消息<span class="badge badge-danger">12</span></a
                     >
                 </li>
-                <li class="nav-item ml-3 btn-group-vertical">
+                <li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser==null}">
                     <a class="nav-link" href="site/register.html" th:href="@{/register}">注册</a>
                 </li>
-                <li class="nav-item ml-3 btn-group-vertical">
+                <li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser==null}">
                     <a class="nav-link" th:href="@{/login}">登录</a>
                 </li>
-                <li class="nav-item ml-3 btn-group-vertical dropdown">
+                <li class="nav-item ml-3 btn-group-vertical dropdown" th:if="${loginUser!=null}">
                     <a
                             class="nav-link dropdown-toggle"
                             href="#"
@@ -59,6 +59,7 @@
                     >
                         <img
                                 src="http://images.nowcoder.com/head/1t.png"
+                                th:src="${loginUser.headerUrl}"
                                 class="rounded-circle"
                                 style="width: 30px"
                                 alt="user icon image"/>
@@ -80,8 +81,8 @@
                         >
                         <div class="dropdown-divider"></div>
                         <span class="dropdown-item text-center text-secondary"
-                        >nowcoder</span
-                        >
+                              th:utext="${loginUser.username}"
+                        >Aidan</span>
                     </div>
                 </li>
             </ul>
