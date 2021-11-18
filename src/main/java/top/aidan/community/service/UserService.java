@@ -214,4 +214,23 @@ public class UserService implements CommunityConstant {
     public LoginTicket findLoginTicket(String ticket) {
         return loginTicketMapper.selectByTicket(ticket);
     }
+
+    /**
+     * 更新用户头像路径
+     *
+     * @param userId    用户 Id
+     * @param headerUrl 头像路径
+     */
+    public void updateHeader(int userId, String headerUrl) {
+        userMapper.updateHeader(userId, headerUrl);
+    }
+
+    /**
+     * 更新用户密码
+     * @param userId 用户 Id
+     * @param password 新密码
+     */
+    public void updatePassword(int userId, String password) {
+        userMapper.updatePassword(userId,password);
+    }
 }

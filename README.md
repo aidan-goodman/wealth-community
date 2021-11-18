@@ -48,16 +48,16 @@ create_time     |timestamp      |注册时间
 
 discuss_post:
 
-字段	|类型	|备注
+字段    |类型    |备注
 :---:       |:---:      |:---:
-id	        |int	    |主键、自增
-user_id	    |int	    |发帖的用户 id，创建索引
-title	    |varchar	|帖子表标题
-content	    |text	    |帖子内容
-type	    |int	    |帖子类型：0 普通、1 置顶
-comment_count	|int	|评论数量
-status	    |int	|帖子状态：0 普通、1 精华、2 拉黑
-create_time	    |timestamp	    |评论发表时间
+id            |int        |主键、自增
+user_id        |int        |发帖的用户 id，创建索引
+title        |varchar    |帖子表标题
+content        |text        |帖子内容
+type        |int        |帖子类型：0 普通、1 置顶
+comment_count    |int    |评论数量
+status        |int    |帖子状态：0 普通、1 精华、2 拉黑
+create_time        |timestamp        |评论发表时间
 
 #### 数据库访问测试
 
@@ -153,3 +153,7 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 > 客户端发起请求 --> Interceptor 进行拦截 --> 进行方法处理（获取 Cookie 中的登录凭证 --> 检验有效性后获取 User 对象） --> 将 User 在视图上进行解析
 
 为防止并发冲突使用 ThreadLocal 进行 User Object 的存储
+
+#### 进行用户信息的修改
+
+使用 MultipartFile 进行文件的上传，存储到本地磁盘后使用 IO 流进行读取，密码进行简单的逻辑处理

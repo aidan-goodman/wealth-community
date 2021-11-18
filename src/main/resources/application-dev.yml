@@ -3,6 +3,7 @@ community:
   path:
     # 其实了解一段 url，并不代表什么，url 是会变的，虽然今天你喜欢 localhost，但明天你还是会喜欢别的
     domain: http://localhost:8080
+    uploadPath: "C:/Data Files/Config Files/uploadFiles"
 # spring
 spring:
   # Thymeleaf
