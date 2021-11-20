@@ -157,3 +157,9 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 #### 进行用户信息的修改
 
 使用 MultipartFile 进行文件的上传，存储到本地磁盘后使用 IO 流进行读取，密码进行简单的逻辑处理
+
+#### 用户登录状态的检查
+
+防止用户未登录时访问一些设置页面或请求，如：setting、upload
+
+使用自定义注解的方式，在用户进行请求时获取其 HandlerMethod，然后获取其请求的路径是否使用自定义注解，如果使用则获取其 user 对象，如果为空则进行拦截
