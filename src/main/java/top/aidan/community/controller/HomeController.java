@@ -34,6 +34,13 @@ public class HomeController {
         this.userService = userService;
     }
 
+    /**
+     * 使用分页查询显示首页
+     *
+     * @param model 存取数据
+     * @param page  页信息，可以封装到 model
+     * @return Model And View
+     */
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page) {
         // 此处的 Page 可以直接注入到 Model

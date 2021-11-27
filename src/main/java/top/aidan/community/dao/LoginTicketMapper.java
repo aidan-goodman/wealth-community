@@ -14,17 +14,16 @@ import top.aidan.community.entity.LoginTicket;
 public interface LoginTicketMapper {
 
     /**
-     * 对登录成功的用户存储登录凭证，采用注解的方式
+     * 对登录成功的用户存储登录凭证，采用注解的方式，id 自动生成
      *
      * @param ticket 当前用户的凭证
-     * @return save result
      */
     @Insert({
             "INSERT into login_ticket(user_id, ticket, status, expired) ",
             "VALUES (#{userId}, #{ticket}, #{status}, #{expired})"
     })
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int insertLoginTicket(LoginTicket ticket);
+    void insertLoginTicket(LoginTicket ticket);
 
     /**
      * 登录时查询凭证

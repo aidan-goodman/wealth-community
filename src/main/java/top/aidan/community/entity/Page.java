@@ -4,20 +4,22 @@ package top.aidan.community.entity;
  * Created by Aidan on 2021/10/13 14:43
  * GitHub: github.com/huaxin0304
  * Blog: aidanblog.top
- *
  * @author Aidan
  * 将分页处理数据进行实体封装
  */
 
 public class Page {
 
-    // 当前页码
+    /**
+     * 成员变量：
+     * current: 当前页码
+     * limit: 单页上限
+     * rows: 数据总行数
+     * path： 查询路径
+     */
     private int current = 1;
-    // 单页上限
     private int limit = 10;
-    // 数据总行数(可用于计算总页数)
     private int rows;
-    // 查询路径(可复用分页链接)
     private String path;
 
     public int getCurrent() {
@@ -36,8 +38,8 @@ public class Page {
 
     public void setLimit(int limit) {
         // 不超过 100，保证效率和阅读体验
-        final int MAX_LIMIT = 100;
-        if (limit >= 1 && limit <= MAX_LIMIT) {
+        final int maxLimit = 100;
+        if (limit >= 1 && limit <= maxLimit) {
             this.limit = limit;
         }
     }
