@@ -163,3 +163,13 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 防止用户未登录时访问一些设置页面或请求，如：setting、upload
 
 使用自定义注解的方式，在用户进行请求时获取其 HandlerMethod，然后获取其请求的路径是否使用自定义注解，如果使用则获取其 user 对象，如果为空则进行拦截
+
+### 核心功能模块
+
+#### 敏感词的过滤
+
+首先定义敏感词判断的前缀树结构，主要包含子节点和结束标识
+
+使用 `@PostConstruct` 注解，在启动时从根目录下获取规定的敏感词字典，完成数据结构的封装
+
+在判断时使用双指针的方式进行处理，如果遇到结束标识则进行敏感词的替换
