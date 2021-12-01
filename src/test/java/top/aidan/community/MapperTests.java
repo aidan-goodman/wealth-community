@@ -94,7 +94,7 @@ class MapperTests {
         loginTicket.setStatus(0);
         loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000 * 60 * 10));
 
-        loginTicketMapper.insertLoginTicket(loginTicket);
+        int i=loginTicketMapper.insertLoginTicket(loginTicket);
     }
 
     @Test
@@ -107,6 +107,16 @@ class MapperTests {
     public void testUpdateLoginTicketStatus() {
         int resultCount = loginTicketMapper.updateStatus("aidanTicket", 1);
         System.out.println(resultCount);
+    }
+
+    @Test
+    public void insertDiscussionPost() {
+        DiscussPost discussPost = new DiscussPost();
+        discussPost.setUserId(155);
+        discussPost.setTitle("测试");
+        discussPost.setContent("测试内容");
+        int i = discussPostMapper.insertDiscussionPost(discussPost);
+        System.out.println(i);
     }
 
 }

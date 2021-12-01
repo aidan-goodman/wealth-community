@@ -8,11 +8,15 @@
         id, user_id, title, content, type, status, create_time, comment_count, score
     </sql>
 
+    <sql id="insertFields">
+        user_id, title, content, type, status, create_time, comment_count, score
+    </sql>
+
     <select id="selectDiscussPosts" resultType="DiscussPost">
         select
         <include refid="selectFields"/>
         from discuss_post
-            where status != 2
+        where status != 2
         <!-- 兼顾查询个人帖子和总帖子 -->
         <if test="userId!=0">
             and user_id = #{userId}
@@ -24,10 +28,20 @@
     <select id="selectDiscussPostRows" resultType="int">
         select count(id)
         from discuss_post
-            where status != 2
+        where status != 2
         <if test="userId!=0">
             and user_id = #{userId}
         </if>
     </select>
+
+    <insert id="insertDiscussionPost" parameterType="DiscussPost" keyProperty="id">
+        # noinspection SqlInsertValues
+
+        insert into discuss_post(<include refid="insertFields"/>)
+        value (
+        #{userId}, #{title}, #{content}, #{type}, #{status},
+        #{createTime}, #{commentCount}, #{score}
+        )
+    </insert>
 
 </mapper>

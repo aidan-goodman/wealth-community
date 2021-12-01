@@ -26,18 +26,18 @@ mybatis，设置 mapper 文件的位置、实体类包名、使用主键等
 
 user:
 
-字段          |类型         |解释
-:---:       |:---:      |:---:
-id          |int        |主键、自增
-username    |varchar    |用户名，创建索引
-password    |varchar    |用户密码
-salt        |varchar    |加密盐值
-email       |varchar    |用户邮箱，创建索引
-type        |int    |用户类型：0 普通、1 管理员、2 版主
-status      |int    |用户状态：0 未激活、1 已激活
-activation_code |varchar        |激活码
-header_url      |varchar        |用户头像地址
-create_time     |timestamp      |注册时间
+|       字段        |    类型     |          解释          |
+|:---------------:|:---------:|:--------------------:|
+|       id        |    int    |        主键、自增         |
+|    username     |  varchar  |       用户名，创建索引       |
+|    password     |  varchar  |         用户密码         |
+|      salt       |  varchar  |         加密盐值         |
+|      email      |  varchar  |      用户邮箱，创建索引       |
+|      type       |    int    | 用户类型：0 普通、1 管理员、2 版主 |
+|     status      |    int    |   用户状态：0 未激活、1 已激活   |
+| activation_code |  varchar  |         激活码          |
+|   header_url    |  varchar  |        用户头像地址        |
+|   create_time   | timestamp |         注册时间         |
 
 解释：
 
@@ -48,16 +48,16 @@ create_time     |timestamp      |注册时间
 
 discuss_post:
 
-字段    |类型    |备注
-:---:       |:---:      |:---:
-id            |int        |主键、自增
-user_id        |int        |发帖的用户 id，创建索引
-title        |varchar    |帖子表标题
-content        |text        |帖子内容
-type        |int        |帖子类型：0 普通、1 置顶
-comment_count    |int    |评论数量
-status        |int    |帖子状态：0 普通、1 精华、2 拉黑
-create_time        |timestamp        |评论发表时间
+|      字段       |    类型     |         备注          |
+|:-------------:|:---------:|:-------------------:|
+|      id       |    int    |        主键、自增        |
+|    user_id    |    int    |    发帖的用户 id，创建索引    |
+|     title     |  varchar  |        帖子表标题        |
+|    content    |   text    |        帖子内容         |
+|     type      |    int    |   帖子类型：0 普通、1 置顶    |
+| comment_count |    int    |        评论数量         |
+|    status     |    int    | 帖子状态：0 普通、1 精华、2 拉黑 |
+|  create_time  | timestamp |       评论发表时间        |
 
 #### 数据库访问测试
 
@@ -173,3 +173,11 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 使用 `@PostConstruct` 注解，在启动时从根目录下获取规定的敏感词字典，完成数据结构的封装
 
 在判断时使用双指针的方式进行处理，如果遇到结束标识则进行敏感词的替换
+
+#### 发帖功能的编写
+
+发帖使用 Ajax 的方式进行数据的传输与解析，为了方便 JSON 数据的处理，首先定义 FastJSON 进行 util 方法的编写
+
+然后定义发帖的后端逻辑（三层），注意判断用户的登录，以及过滤敏感词和处理 HTML 元素
+
+编写前端逻辑，使用 jQuery 进行 Ajax 的编写，处理接收后的 JSON 数据并更改页面

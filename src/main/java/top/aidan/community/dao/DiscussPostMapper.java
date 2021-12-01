@@ -41,5 +41,13 @@ public interface DiscussPostMapper {
     int selectDiscussPostRows(
             @Param("userId") int userId);
 
+    /**
+     * 进行发帖时帖子的插入
+     *
+     * @param discussPost 对应的帖子对象
+     * @return result
+     */
+    int insertDiscussionPost(DiscussPost discussPost);
+
 
 }

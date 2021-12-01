@@ -176,7 +176,6 @@ public class LoginController implements CommunityConstant {
             response.addCookie(cookie);
             return "redirect:/index";
         } else {
-
             // 我不是归人，是个过客...
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));

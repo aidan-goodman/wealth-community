@@ -70,6 +70,7 @@ public class UserController {
     }
 
     /**
+     * 修改头像
      * 直接在控制层进行处理，低耦合
      *
      * @param headerImage 用户上传的图片
@@ -96,7 +97,7 @@ public class UserController {
         }
 
         // 防止用户名冲突，使用 UUID 作为文件名
-        filename = CommunityUtil.generateUUID() + suffix;
+        filename = CommunityUtil.generateUuid() + suffix;
 
         File dest = new File(uploadPath + "/" + filename);
         try {
