@@ -1,12 +1,15 @@
 package top.aidan.community.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.aidan.community.entity.DiscussPost;
 import top.aidan.community.entity.User;
 import top.aidan.community.service.DiscussPostService;
+import top.aidan.community.service.UserService;
 import top.aidan.community.util.CommunityUtil;
 import top.aidan.community.util.HostHolder;
 
@@ -24,10 +27,12 @@ import java.util.Date;
 public class DiscussPostController {
     private final DiscussPostService discussPostService;
     private final HostHolder hostHolder;
+    private final UserService userService;
 
-    public DiscussPostController(DiscussPostService discussPostService, HostHolder hostHolder) {
+    public DiscussPostController(DiscussPostService discussPostService, HostHolder hostHolder, UserService userService) {
         this.discussPostService = discussPostService;
         this.hostHolder = hostHolder;
+        this.userService = userService;
     }
 
     /**
@@ -53,13 +58,22 @@ public class DiscussPostController {
         post.setContent(content);
         post.setCreateTime(new Date());
 
-        // 插入成功返回结果
-        if (discussPostService.addDiscussionPost(post) > 0) {
-            return CommunityUtil.getJsonString(200, "帖子发布成功");
-        }
+        // 成功则返回结果，如果失败后续统一进行异常管理
+        return discussPostService.addDiscussionPost(post) > 0 ?
+                CommunityUtil.getJsonString(200, "帖子发布成功") :
+                CommunityUtil.getJsonString(500, "服务器错误");
 
-        // 后续统一进行异常管理
-        return CommunityUtil.getJsonString(500, "服务器错误");
+    }
+
+    @RequestMapping(path = "/detail/{discussionPostId}", method = RequestMethod.GET)
+    public String getDiscussionPost(@PathVariable(name = "discussionPostId") int discussionPostId, Model model) {
+        DiscussPost post = discussPostService.findDiscussPostById(discussionPostId);
+        model.addAttribute("post", post);
+
+        User user = userService.findUserById(post.getUserId());
+        model.addAttribute("user",user);
+
+        return "/site/discuss-detail";
 
     }
 }

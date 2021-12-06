@@ -71,7 +71,7 @@ public class UserController {
 
     /**
      * 修改头像
-     * 直接在控制层进行处理，低耦合
+     * 直接在控制层进行处理，降低耦合
      *
      * @param headerImage 用户上传的图片
      * @param model       存储错误信息
@@ -96,7 +96,7 @@ public class UserController {
             return "/site/setting";
         }
 
-        // 防止用户名冲突，使用 UUID 作为文件名
+        // 防止文件名冲突，使用 UUID 作为文件名
         filename = CommunityUtil.generateUuid() + suffix;
 
         File dest = new File(uploadPath + "/" + filename);

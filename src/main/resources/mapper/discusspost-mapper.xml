@@ -44,4 +44,11 @@
         )
     </insert>
 
+    <select id="selectDiscussPostById" resultType="DiscussPost">
+        select
+        <include refid="selectFields"/>
+        from discuss_post
+        where id=#{id}
+    </select>
+
 </mapper>

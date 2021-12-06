@@ -181,3 +181,29 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 然后定义发帖的后端逻辑（三层），注意判断用户的登录，以及过滤敏感词和处理 HTML 元素
 
 编写前端逻辑，使用 jQuery 进行 Ajax 的编写，处理接收后的 JSON 数据并更改页面
+
+#### 帖子详情的展示
+
+使用路径参数的方式进行请求，后端查询后返回
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
