@@ -11,7 +11,7 @@ import top.aidan.community.util.HostHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author Aidan
@@ -40,7 +40,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
         if (ticket != null) {
             // 根据凭证查询对象
             LoginTicket loginTicket = userService.findLoginTicket(ticket);
-            if (loginTicket != null && loginTicket.getStatus() == 0 && loginTicket.getExpired().after(new Date())) {
+            if (loginTicket != null && loginTicket.getStatus() == 0 && loginTicket.getExpired().isAfter(LocalDateTime.now())) {
                 User user = userService.findUserById(loginTicket.getUserId());
                 // 在本次请求中持有用户
                 hostHolder.setUser(user);

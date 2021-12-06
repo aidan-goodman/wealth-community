@@ -2,7 +2,7 @@ package top.aidan.community.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author Aidan
@@ -18,6 +18,6 @@ public class LoginTicket {
     private int userId;
     private String ticket;
     private int status;
-    private Date expired;
+    private LocalDateTime expired;
 
 }

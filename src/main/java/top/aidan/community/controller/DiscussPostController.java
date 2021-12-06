@@ -13,7 +13,7 @@ import top.aidan.community.service.UserService;
 import top.aidan.community.util.CommunityUtil;
 import top.aidan.community.util.HostHolder;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author Aidan
@@ -56,7 +56,7 @@ public class DiscussPostController {
         post.setUserId(user.getId());
         post.setTitle(title);
         post.setContent(content);
-        post.setCreateTime(new Date());
+        post.setCreateTime(LocalDateTime.now());
 
         // 成功则返回结果，如果失败后续统一进行异常管理
         return discussPostService.addDiscussionPost(post) > 0 ?
@@ -71,7 +71,7 @@ public class DiscussPostController {
         model.addAttribute("post", post);
 
         User user = userService.findUserById(post.getUserId());
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
 
         return "/site/discuss-detail";
 
