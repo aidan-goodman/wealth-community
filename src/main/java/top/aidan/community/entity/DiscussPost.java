@@ -2,13 +2,12 @@ package top.aidan.community.entity;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by Aidan on 2021/10/11 20:36
  * GitHub: github.com/huaxin0304
  * Blog: aidanblog.top
- * @author Aidan
  */
 
 @Data
@@ -26,7 +25,7 @@ public class DiscussPost {
 
     private int status;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 
     private int commentCount;
 
