@@ -187,10 +187,7 @@ Authentication failed; nested exception is javax.mail.AuthenticationFailedExcept
 使用路径参数的方式进行请求，后端查询后返回
 
 
-#### 评论的显示
 
-考虑到数据层的分页显示，同时有着回复与评论两种情况的出现，前端的显示界面需要比较复杂<br/>
-评论和回复的形式分别为：`List<Map<String, Object>> And List<Map<String, List<Map<String, Object>>>>`
 
 
 

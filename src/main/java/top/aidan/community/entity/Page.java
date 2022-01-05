@@ -1,7 +1,5 @@
 package top.aidan.community.entity;
 
-import lombok.Data;
-
 /**
  * Created by Aidan on 2021/10/13 14:43
  * GitHub: github.com/huaxin0304
@@ -10,7 +8,6 @@ import lombok.Data;
  * 将分页处理数据进行实体封装
  */
 
-@Data
 public class Page {
 
     /**
@@ -25,11 +22,18 @@ public class Page {
     private int rows;
     private String path;
 
+    public int getCurrent() {
+        return current;
+    }
 
     public void setCurrent(int current) {
         if (current >= 1) {
             this.current = current;
         }
+    }
+
+    public int getLimit() {
+        return limit;
     }
 
     public void setLimit(int limit) {
@@ -40,10 +44,22 @@ public class Page {
         }
     }
 
+    public int getRows() {
+        return rows;
+    }
+
     public void setRows(int rows) {
         if (rows >= 0) {
             this.rows = rows;
         }
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     /**
