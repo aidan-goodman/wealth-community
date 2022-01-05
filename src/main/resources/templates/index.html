@@ -150,13 +150,15 @@
                             <ul class="d-inline float-right">
                                 <li class="d-inline ml-2">赞 11</li>
                                 <li class="d-inline ml-2">|</li>
-                                <li class="d-inline ml-2">回帖 7</li>
+                                <li class="d-inline ml-2">回帖 <span th:text="${map.post.commentCount}">7</span></li>
                             </ul>
                         </div>
                     </div>
                 </li>
             </ul>
             <!-- 分页 -->
+            <nav th:replace="common :: pagination"></nav>
+            <!-- 分页
             <nav class="mt-5" th:if="${page.rows>0}">
                 <ul class="pagination justify-content-center">
                     <li th:class="|page-item ${page.current==1?'disabled':''}|">
@@ -171,7 +173,7 @@
                     </li>
                     <li th:class="|page-item ${i==page.current?'active':''}|"
                         th:each="i:${#numbers.sequence(page.from,page.to)}">
-                        <!-- 使用 numbers.sequence 设置循环 -->
+                        &lt;!&ndash; 使用 numbers.sequence 设置循环 &ndash;&gt;
                         <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">
                             1
                         </a>
@@ -187,7 +189,7 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav>-->
         </div>
     </div>
 
