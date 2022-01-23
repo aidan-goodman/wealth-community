@@ -38,7 +38,7 @@
         # noinspection SqlInsertValues
 
         insert into discuss_post(<include refid="insertFields"/>)
-        value (
+        values (
         #{userId}, #{title}, #{content}, #{type}, #{status},
         #{createTime}, #{commentCount}, #{score}
         )
@@ -48,7 +48,13 @@
         select
         <include refid="selectFields"/>
         from discuss_post
-        where id=#{id}
+        where id = #{id}
     </select>
+
+    <update id="updateCommentCount">
+        update discuss_post
+        set comment_count = #{commentCount}
+        where id = #{id}
+    </update>
 
 </mapper>

@@ -38,6 +38,7 @@ public class DiscussPostService {
 
     /**
      * 调用 DAO 层进行数据的持久化
+     *
      * @param post 已封装的 DicussPost 对象
      * @return result
      */
@@ -61,4 +62,7 @@ public class DiscussPostService {
         return discussPostMapper.selectDiscussPostById(id);
     }
 
+    public int updateCommentCount(int id, int commentCount) {
+        return discussPostMapper.updateCommentCount(id, commentCount);
+    }
 }

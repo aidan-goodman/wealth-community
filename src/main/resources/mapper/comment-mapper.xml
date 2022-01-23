@@ -7,9 +7,13 @@
     <sql id="selectFields">
         id, user_id, entity_type, entity_id, target_id, content, status, create_time
     </sql>
+    <sql id="insertFields">
+        user_id, entity_type, entity_id, target_id, content, status, create_time
+    </sql>
 
     <select id="selectCommentsByEntity" resultType="Comment">
-        select <include refid="selectFields"/>
+        select
+        <include refid="selectFields"/>
         from comment
         where status = 0
         and entity_type = #{entityType}
@@ -26,4 +30,13 @@
           and entity_id = #{entityId}
     </select>
 
+    <insert id="insertComment" parameterType="Comment">
+        # noinspection SqlInsertValues
+
+        insert into comment (<include refid="insertFields"/>)
+        values (
+        #{userId}, #{entityType}, #{entityId}, #{targetId},
+        #{content},#{status},#{createTime}
+        )
+    </insert>
 </mapper>
