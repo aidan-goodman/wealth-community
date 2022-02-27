@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!--  项目信息  -->
     <groupId>top.aidan</groupId>
     <artifactId>community</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>community</name>
-    <description>community</description>
+    <version>1.0-SNAPSHOT</version>
 
-    <!--  全局配置  -->
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
-        <mysql.version>8.0.27</mysql.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <mysql.version>8.0.28</mysql.version>
     </properties>
 
     <!-- lookup parent from repository -->
@@ -52,7 +45,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
-            <version>2.5.6</version>
+            <version>2.6.3</version>
         </dependency>
         <!-- 工具性依赖：验证码、字符检查、Json 解析 -->
         <dependency>
@@ -68,7 +61,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.78</version>
+            <version>1.2.79</version>
         </dependency>
 
 
@@ -89,6 +82,7 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
         <!--  数据访问：MySQL 驱动、MyBatis  -->
         <dependency>
             <groupId>mysql</groupId>
@@ -98,7 +92,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.0</version>
+            <version>2.2.2</version>
         </dependency>
         <!-- 测试包 -->
         <dependency>
@@ -112,7 +106,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <resources>

@@ -3,13 +3,11 @@
     {
       "name": "community.path.domain",
       "type": "java.lang.String",
-      "description": "Description for community.path.domain.",
-      "defaultValue": "http://localhost:8080"
+      "description": "Description for community.path.domain."
     },
     {
       "name": "community.path.uploadPath",
       "type": "java.lang.String",
-      "description": "Description for community.path.uploadPath.",
-      "defaultValue": "C:\\Data Files\\Config Files\\uploadFiles"
+      "description": "Description for community.path.uploadPath."
     }
   ] }

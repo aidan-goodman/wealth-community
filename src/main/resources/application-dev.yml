@@ -3,7 +3,7 @@ community:
   path:
     # 其实了解一段 url，并不代表什么，url 是会变的，虽然今天你喜欢 localhost，但明天你还是会喜欢别的
     domain: http://localhost:8080
-    uploadPath: "C:/Data Files/Config Files/uploadFiles"
+    uploadPath: "C:\\Data_Files\\Document\\other\\communityupload"
 # spring
 spring:
   # Thymeleaf
@@ -17,14 +17,14 @@ spring:
   # DataSource
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://ubuntu.wsl:3306/community?allowPublicKeyRetrieval=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
-    username: root
-    password: JX34&
+    url: jdbc:mysql://localhost:3306/community?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       maximum-pool-size: 15
       minimum-idle: 5
       idle-timeout: 30000
+    username: root
+    password: Jx34&
   # Mail
   mail:
     host: smtp.163.com
