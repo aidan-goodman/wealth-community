@@ -61,8 +61,7 @@ footer .company-info li {
 }
 
 .main {
-	padding: 20px 0;
-	padding-bottom: 200px;
+    padding: 20px 0 200px;
 }
 
 .main .container {

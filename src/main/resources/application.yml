@@ -30,7 +30,7 @@ spring:
     host: smtp.163.com
     port: 465
     username: JunXiao_Song@163.com
-    password: QXBYWOPDTTDHALCI
+    password: CPBAPZJETJGGUMEO
     protocol: smtps
 # Mybatis
 mybatis:

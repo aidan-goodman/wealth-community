@@ -11,7 +11,7 @@
         user_id, entity_type, entity_id, target_id, content, status, create_time
     </sql>
 
-    <select id="selectCommentsByEntity" resultType="Comment">
+    <select id="selectCommentsByEntity" resultType="top.aidan.community.entity.Comment">
         select
         <include refid="selectFields"/>
         from comment
@@ -30,7 +30,7 @@
           and entity_id = #{entityId}
     </select>
 
-    <insert id="insertComment" parameterType="Comment">
+    <insert id="insertComment" parameterType="top.aidan.community.entity.Comment">
         # noinspection SqlInsertValues
 
         insert into comment (<include refid="insertFields"/>)
