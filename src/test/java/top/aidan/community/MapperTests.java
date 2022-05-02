@@ -8,9 +8,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import top.aidan.community.dao.DiscussPostMapper;
 import top.aidan.community.dao.LoginTicketMapper;
+import top.aidan.community.dao.MessageMapper;
 import top.aidan.community.dao.UserMapper;
 import top.aidan.community.entity.DiscussPost;
 import top.aidan.community.entity.LoginTicket;
+import top.aidan.community.entity.Message;
 import top.aidan.community.entity.User;
 
 import java.util.Date;
@@ -35,6 +37,9 @@ class MapperTests {
 
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+
+    @Autowired
+    private MessageMapper messageMapper;
 
     @Test
     public void testSelectUser() {
@@ -94,7 +99,6 @@ class MapperTests {
         loginTicket.setStatus(0);
         loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000 * 60 * 10));
 
-        int i=loginTicketMapper.insertLoginTicket(loginTicket);
     }
 
     @Test
@@ -117,6 +121,29 @@ class MapperTests {
         discussPost.setContent("测试内容");
         int i = discussPostMapper.insertDiscussionPost(discussPost);
         System.out.println(i);
+    }
+
+    @Test
+    public void testSelectLetters() {
+        List<Message> list = messageMapper.selectConversations(111, 0, 20);
+        for (Message message : list) {
+            System.out.println(message);
+        }
+
+        int count = messageMapper.selectConversationCount(111);
+        System.out.println(count);
+
+        list = messageMapper.selectLetters("111_112", 0, 10);
+        for (Message message : list) {
+            System.out.println(message);
+        }
+
+        count = messageMapper.selectLetterCount("111_112");
+        System.out.println(count);
+
+        count = messageMapper.selectLetterUnreadCount(131, "111_131");
+        System.out.println(count);
+
     }
 
 }

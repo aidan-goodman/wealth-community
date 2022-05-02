@@ -58,7 +58,6 @@ public class CommentService implements CommunityConstant {
             discussPostService.updateCommentCount(comment.getEntityId(), count);
         }
 
-
         return rows;
     }
 }
