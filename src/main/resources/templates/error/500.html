@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/global.css}"/>
+    <title>如禅-500</title>
+</head>
+<body>
+<div class="nk-container">
+    <!-- 头部 -->
+    <header class="bg-dark sticky-top">
+        <div th:replace="common :: common_header"></div>
+    </header>
+
+    <!-- 内容 -->
+    <div class="main">
+        <div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
+            <IFRAME th:src="@{/img/err-500.html}" frameBorder=0 marginwidth=0 marginheight=0 scrolling=no
+                    width=95% height=600
+                    ALLOWTRANSPARENCY="true"></IFRAME>
+        </div>
+    </div>
+
+    <!-- 尾部 -->
+    <footer class="bg-dark">
+        <div th:replace="common :: common_trailer"></div>
+    </footer>
+</div>
+
+<div th:replace="common :: common_script"></div>
+<script th:src="@{/js/index.js}"></script>
+</body>
+</html>

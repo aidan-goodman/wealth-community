@@ -8,6 +8,10 @@
         id, from_id, to_id, conversation_id, content, status, create_time
     </sql>
 
+    <sql id="insertFields">
+        from_id, to_id, conversation_id, content, status, create_time
+    </sql>
+
     <select id="selectConversations" resultType="Message">
         select
         <include refid="selectFields"/>
@@ -25,14 +29,13 @@
 
     <select id="selectConversationCount" resultType="int">
         select count(m.maxid)
-        from (
-                 select max(id) as maxid
-                 from message
-                 where status != 2
+        from (select max(id) as maxid
+              from message
+              where status != 2
                    and from_id != 1
-                   and (from_id = #{userId} or to_id = #{userId})
-                 group by conversation_id
-             ) as m
+                   and (from_id = #{userId}
+                 or to_id = #{userId})
+              group by conversation_id) as m
     </select>
 
     <select id="selectLetters" resultType="Message">
@@ -64,4 +67,17 @@
             and conversation_id = #{conversationId}
         </if>
     </select>
+
+    <insert id="insertMessage" parameterType="Message" keyProperty="id">
+        insert into message(<include refid="insertFields"/>)
+        values(#{fromId},#{toId},#{conversationId},#{content},#{status},#{createTime})
+    </insert>
+
+    <update id="updateStatus">
+        update message set status = #{status}
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

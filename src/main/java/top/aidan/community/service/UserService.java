@@ -216,6 +216,16 @@ public class UserService implements CommunityConstant {
     }
 
     /**
+     * 根据姓名查询用户
+     *
+     * @param username 用户名
+     * @return 用户
+     */
+    public User findUserByName(String username) {
+        return userMapper.selectByName(username);
+    }
+
+    /**
      * 更新用户头像路径
      *
      * @param userId    用户 Id
@@ -227,10 +237,11 @@ public class UserService implements CommunityConstant {
 
     /**
      * 更新用户密码
-     * @param userId 用户 Id
+     *
+     * @param userId   用户 Id
      * @param password 新密码
      */
     public void updatePassword(int userId, String password) {
-        userMapper.updatePassword(userId,password);
+        userMapper.updatePassword(userId, password);
     }
 }
