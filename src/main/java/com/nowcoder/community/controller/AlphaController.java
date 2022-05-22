@@ -53,7 +53,7 @@ public class AlphaController {
         try (
                 PrintWriter writer = response.getWriter();
         ) {
-            writer.write("<h1>牛客网</h1>");
+            writer.write("<h1>如禅网</h1>");
         } catch (IOException e) {
             e.printStackTrace();
         }
