@@ -13,7 +13,8 @@
     </sql>
 
     <select id="selectDiscussPosts" resultType="DiscussPost">
-        select <include refid="selectFields"></include>
+        select
+        <include refid="selectFields"/>
         from discuss_post
         where status != 2
         <if test="userId!=0">
@@ -43,25 +44,34 @@
     </insert>
 
     <select id="selectDiscussPostById" resultType="DiscussPost">
-        select <include refid="selectFields"></include>
+        select
+        <include refid="selectFields"></include>
         from discuss_post
         where id = #{id}
     </select>
 
     <update id="updateCommentCount">
-        update discuss_post set comment_count = #{commentCount} where id = #{id}
+        update discuss_post
+        set comment_count = #{commentCount}
+        where id = #{id}
     </update>
 
     <update id="updateType">
-        update discuss_post set type = #{type} where id = #{id}
+        update discuss_post
+        set type = #{type}
+        where id = #{id}
     </update>
 
     <update id="updateStatus">
-        update discuss_post set status = #{status} where id = #{id}
+        update discuss_post
+        set status = #{status}
+        where id = #{id}
     </update>
 
     <update id="updateScore">
-        update discuss_post set score = #{score} where id = #{id}
+        update discuss_post
+        set score = #{score}
+        where id = #{id}
     </update>
 
 </mapper>
