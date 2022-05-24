@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <contextName>community</contextName>
-    <property name="LOG_PATH" value="D:/work/data"/>
+    <property name="LOG_PATH" value="/home/aidan/local/log/dev"/>
     <property name="APPDIR" value="community"/>
 
     <!-- error file -->
