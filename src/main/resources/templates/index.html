@@ -8,10 +8,11 @@
     <!--	<meta name="_csrf" th:content="${_csrf.token}">-->
     <!--	<meta name="_csrf_header" th:content="${_csrf.headerName}">-->
 
-    <link rel="icon" href="https://assets.aidanblog.top/icon/GitHub.jpg"/>
+    <link rel="icon" href="http://rc8kcwe17.hb-bkt.clouddn.com/icon/logo.png"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/global.css}"/>
+    <link rel="stylesheet" th:href="@{/css/slide.css}"/>
     <title>如禅网-首页</title>
 </head>
 <body>
@@ -33,6 +34,18 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item ml-3 btn-group-vertical">
                             <a class="nav-link" th:href="@{/index}">首页</a>
+                        </li>
+                        <li class="nav-item ml-3 btn-group-vertical">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-section" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">版块
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown-section">
+                                <a class="dropdown-item text-center" th:href="@{/index(section=1)}">股票</a>
+                                <a class="dropdown-item text-center" th:href="@{/index(section=2)}">基金</a>
+                                <a class="dropdown-item text-center" th:href="@{/index(section=3)}">求助贴</a>
+                                <div class="dropdown-divider"></div>
+                                <span class="dropdown-item text-center text-secondary">生财有道</span>
+                            </div>
                         </li>
                         <li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser!=null}">
                             <a class="nav-link position-relative" th:href="@{/letter/list}">消息<span
@@ -71,6 +84,28 @@
         </div>
     </header>
 
+    <!-- Slideshow start -->
+    <div th:style="'display:' + (${section} != 0 ? 'none' : 'inline-block') + ''">
+        <div class="container-customize">
+            <!-- 先把第一张图片显示出来 -->
+            <img class="on" id="test" th:src="@{/img/1.png}"/>
+            <img th:src="@{/img/2.png}"/>
+            <img th:src="@{/img/3.png}"/>
+            <img th:src="@{/img/4.png}"/>
+            <!-- 左右切换 -->
+            <div class="left"><</div>
+            <div class="right">></div>
+            <!-- 焦点 -->
+            <ul>
+                <li class="active-customize"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Slideshow end -->
+
     <!-- 内容 -->
     <div class="main">
         <div class="container">
@@ -78,10 +113,12 @@
                 <!-- 筛选条件 -->
                 <ul class="nav nav-tabs mb-3">
                     <li class="nav-item">
-                        <a th:class="|nav-link ${orderMode==0?'active':''}|" th:href="@{/index(orderMode=0)}">最新</a>
+                        <a th:class="|nav-link ${orderMode==0?'active':''}|"
+                           th:href="@{/index(orderMode=0, section=${section})}">最新</a>
                     </li>
                     <li class="nav-item">
-                        <a th:class="|nav-link ${orderMode==1?'active':''}|" th:href="@{/index(orderMode=1)}">最热</a>
+                        <a th:class="|nav-link ${orderMode==1?'active':''}|"
+                           th:href="@{/index(orderMode=1, section=${section})}">最热</a>
                     </li>
                 </ul>
                 <button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal"
@@ -113,7 +150,20 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary" id="publishBtn">发布</button>
+                            <button type="button" class="btn btn-primary" id="publishBtn" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">发布
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="publishBtn">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="publishBtn1">
+                                    股票
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="publishBtn2">
+                                    基金
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="publishBtn3">
+                                    求助贴
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,13 +216,13 @@
                         <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
                     </li>
                     <li th:class="|page-item ${page.current==1?'disabled':''}|">
-                        <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                        <a class="page-link" th:href="@{${page.path}(current=${page.current - 1})}">上一页</a></li>
                     <li th:class="|page-item ${i==page.current?'active':''}|"
                         th:each="i:${#numbers.sequence(page.from,page.to)}">
                         <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
                     </li>
                     <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
-                        <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                        <a class="page-link" th:href="@{${page.path}(current=${page.current + 1})}">下一页</a>
                     </li>
                     <li class="page-item">
                         <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
@@ -253,5 +303,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script th:src="@{/js/global.js}"></script>
 <script th:src="@{js/index.js}"></script>
+<script th:src="@{js/slide.js}"></script>
 </body>
 </html>

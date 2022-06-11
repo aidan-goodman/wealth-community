@@ -69,7 +69,7 @@ public class DiscussPostService {
                         // 二级缓存: Redis -> mysql
 
                         logger.debug("load post list from DB.");
-                        return discussPostMapper.selectDiscussPosts(0, offset, limit, 1);
+                        return discussPostMapper.selectDiscussPosts(0, offset, limit, 1, 0);
                     }
                 });
         // 初始化帖子总数缓存
@@ -86,13 +86,13 @@ public class DiscussPostService {
                 });
     }
 
-    public List<DiscussPost> findDiscussPosts(int userId, int offset, int limit, int orderMode) {
-        if (userId == 0 && orderMode == 1) {
+    public List<DiscussPost> findDiscussPosts(int userId, int offset, int limit, int orderMode, int section) {
+        if (userId == 0 && orderMode == 1 && section == 0) {
             return postListCache.get(offset + ":" + limit);
         }
 
         logger.debug("load post list from DB.");
-        return discussPostMapper.selectDiscussPosts(userId, offset, limit, orderMode);
+        return discussPostMapper.selectDiscussPosts(userId, offset, limit, orderMode, section);
     }
 
     public int findDiscussPostRows(int userId) {

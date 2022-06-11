@@ -7,6 +7,7 @@ import com.nowcoder.community.service.DiscussPostService;
 import com.nowcoder.community.service.LikeService;
 import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.CommunityConstant;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,14 +39,15 @@ public class HomeController implements CommunityConstant {
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page,
-                               @RequestParam(name = "orderMode", defaultValue = "0") int orderMode) {
+                               @RequestParam(name = "orderMode", defaultValue = "0") int orderMode,
+                               @RequestParam(name = "section", defaultValue = "0") int section) {
         // 方法调用钱,SpringMVC会自动实例化Model和Page,并将Page注入Model.
         // 所以,在thymeleaf中可以直接访问Page对象中的数据.
         page.setRows(discussPostService.findDiscussPostRows(0));
-        page.setPath("/index?orderMode=" + orderMode);
+        page.setPath("/index?orderMode=" + orderMode + "&sectionMode=" + section);
 
         List<DiscussPost> list = discussPostService
-                .findDiscussPosts(0, page.getOffset(), page.getLimit(), orderMode);
+                .findDiscussPosts(0, page.getOffset(), page.getLimit(), orderMode, section);
         List<Map<String, Object>> discussPosts = new ArrayList<>();
         if (list != null) {
             for (DiscussPost post : list) {
@@ -62,6 +64,7 @@ public class HomeController implements CommunityConstant {
         }
         model.addAttribute("discussPosts", discussPosts);
         model.addAttribute("orderMode", orderMode);
+        model.addAttribute("section", section);
 
         return "/index";
     }

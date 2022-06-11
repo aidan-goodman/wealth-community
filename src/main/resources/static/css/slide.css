@@ -1,0 +1,84 @@
+/* SlideShow start */
+/*首先准备一个放图片的容器*/
+.container-customize {
+    width: 960px;
+    height: 420px;
+    position: relative;
+    left: 152px;
+    top: 15px;
+    bottom: 15px;
+    /*border: 1px solid #ccc;*/
+}
+
+/*图片样式*/
+.container-customize img {
+    position: absolute; /*把所有图片放在同一个位置*/
+    width: 100%;
+    height: 100%;
+    transition-duration: 0.5s; /*设置过渡时间*/
+    opacity: 0; /*把所有图片变透明*/
+}
+
+/*图片显示开关*/
+.container-customize img.on {
+    opacity: 1; /*用于显示图片*/
+}
+
+/*左右按钮 为了简便就用大于小于号*/
+.left,
+.right {
+    position: absolute;
+    top: 40%;
+    width: 30px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #666;
+    opacity: 0.5;
+    text-align: center;
+    font-size: 40px;
+    color: #ccc;
+    display: none; /*先隐藏按钮*/
+    cursor: pointer; /*设置鼠标悬停时的样式*/
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
+.container-customize:hover .left,
+.container-customize:hover .right {
+    display: block; /*鼠标悬停才容器范围内时显示按钮*/
+}
+
+.left:hover,
+.right:hover {
+    color: #cccccc;
+}
+
+/*焦点*/
+.container-customize ul {
+    position: absolute;
+    bottom: 0;
+}
+
+.container-customize ul li {
+    list-style: none;
+    float: left;
+    background-color: #ccc;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.container-customize ul li.active-customize {
+    background-color: #282923; /*焦点激活时的样式*/
+}
+
+/* SlideShow end */

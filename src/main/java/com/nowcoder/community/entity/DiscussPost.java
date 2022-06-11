@@ -24,6 +24,9 @@ public class DiscussPost {
     private String content;
 
     @Field(type = FieldType.Integer)
+    private int section;
+
+    @Field(type = FieldType.Integer)
     private int type;
 
     @Field(type = FieldType.Integer)
@@ -68,6 +71,14 @@ public class DiscussPost {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getSection() {
+        return section;
+    }
+
+    public void setSection(int section) {
+        this.section = section;
     }
 
     public int getType() {
